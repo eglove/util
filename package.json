@@ -9,10 +9,11 @@
     "extends": "ethang"
   },
   "scripts": {
+    "lint": "eslint . --fix",
     "build": "node build.mjs"
   },
   "dependencies": {
-    "eslint-config-ethang": "^11.2.5",
+    "eslint-config-ethang": "^11.2.6",
     "rimraf": "^5.0.5"
   }
 }

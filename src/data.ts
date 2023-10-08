@@ -1,5 +1,17 @@
-export function isEmpty(value: string): value is '' {
-  return value === '';
+export function isEmpty(value: unknown): boolean {
+  if (isNil(value)) {
+    return true;
+  }
+
+  if (Array.isArray(value)) {
+    return value.length === 0;
+  }
+
+  if (typeof value === 'string') {
+    return value === '';
+  }
+
+  return true;
 }
 
 export function isNil<Type>(

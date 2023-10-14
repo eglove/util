@@ -24,9 +24,9 @@ type TryCatchResult<Type> =
   | { data: Type; isSuccess: true }
   | { error: unknown; isSuccess: false };
 
-export function tryCatch<FunctionType extends () => ReturnType<FunctionType>>(
-  function_: FunctionType,
-): TryCatchResult<ReturnType<FunctionType>> {
+export function tryCatch<T extends () => ReturnType<T>>(
+  function_: T,
+): TryCatchResult<ReturnType<T>> {
   try {
     return { data: function_(), isSuccess: true };
   } catch (error) {
@@ -35,10 +35,11 @@ export function tryCatch<FunctionType extends () => ReturnType<FunctionType>>(
 }
 
 export async function tryCatchAsync<
-  FunctionType extends () => Promise<ReturnType<FunctionType>>,
->(function_: FunctionType): Promise<TryCatchResult<ReturnType<FunctionType>>> {
+  T extends () => Promise<Awaited<ReturnType<T>>>,
+>(function_: T): Promise<TryCatchResult<Awaited<ReturnType<T>>>> {
   try {
-    return { data: await function_(), isSuccess: true };
+    const data = await function_();
+    return { data, isSuccess: true };
   } catch (error) {
     return { error, isSuccess: false };
   }

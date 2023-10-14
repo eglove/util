@@ -28,7 +28,7 @@ export function tryCatch<FunctionType extends () => ReturnType<FunctionType>>(
   function_: FunctionType,
 ):
   | TryCatchResult<ReturnType<FunctionType>>
-  | Promise<TryCatchResult<Awaited<ReturnType<FunctionType>>>> {
+  | Promise<TryCatchResult<ReturnType<FunctionType>>> {
   try {
     const data = function_();
 

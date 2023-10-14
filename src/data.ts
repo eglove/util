@@ -19,3 +19,17 @@ export function isNil<Type>(
 ): value is null | undefined {
   return value === null || value === undefined;
 }
+
+type TryCatchResult<Type> =
+  | { data: Type; isSuccess: true }
+  | { error: unknown; isSuccess: false };
+
+export function tryCatch<FunctionType extends () => ReturnType<FunctionType>>(
+  function_: FunctionType,
+): TryCatchResult<ReturnType<FunctionType>> {
+  try {
+    return { data: function_(), isSuccess: true };
+  } catch (error) {
+    return { error, isSuccess: false };
+  }
+}

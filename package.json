@@ -1,6 +1,6 @@
 {
   "name": "@ethang/util",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "Utilities",
   "main": "index.js",
   "author": "Ethan Glover",

@@ -8,7 +8,7 @@ export function isObject(item: unknown): item is ObjectType {
   return !isNil(item) && typeof item === 'object' && !Array.isArray(item);
 }
 
-export function deepMerge<T extends ObjectType, U extends ObjectType>(
+export function deepMerge<T, U>(
   target: T,
   ...sources: Array<U | undefined>
 ): T & U {
@@ -23,10 +23,10 @@ export function deepMerge<T extends ObjectType, U extends ObjectType>(
       if (!isNil(source[key])) {
         const value = source[key as keyof typeof source];
 
-        if (isObject(value) && isObject(target[key])) {
+        if (isObject(value) && isObject(target[key as unknown as keyof T])) {
           // eslint-disable-next-line functional/immutable-data
-          output[key as keyof typeof output] = deepMerge(
-            target[key] as ObjectType,
+          output[key as unknown as keyof T] = deepMerge(
+            target[key as unknown as keyof T] as ObjectType,
             value as ObjectType,
           ) as ComplexIntersection<T, U>;
         } else {

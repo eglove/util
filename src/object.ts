@@ -10,11 +10,15 @@ export function isObject(item: unknown): item is ObjectType {
 
 export function deepMerge<T extends ObjectType, U extends ObjectType>(
   target: T,
-  ...sources: U[]
+  ...sources: Array<U | undefined>
 ): T & U {
   const output = { ...target } as Partial<T & U>;
 
   for (const source of sources) {
+    if (isNil(source)) {
+      continue;
+    }
+
     for (const key in source) {
       if (!isNil(source[key])) {
         const value = source[key as keyof typeof source];

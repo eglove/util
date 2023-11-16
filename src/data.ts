@@ -24,6 +24,12 @@ export function isNil<Type>(
   return value === null || value === undefined;
 }
 
+export function isNumber<Type>(
+  value: Type | null | undefined,
+): value is Type extends number ? Type : never {
+  return !isNil(value) && typeof value === 'number';
+}
+
 type TryCatchResult<Type> =
   | { data: Type; isSuccess: true }
   | { error: unknown; isSuccess: false };

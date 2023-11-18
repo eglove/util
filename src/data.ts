@@ -27,7 +27,23 @@ export function isNil<Type>(
 export function isNumber<Type>(
   value: Type | null | undefined,
 ): value is Type extends number ? Type : never {
-  return !isNil(value) && typeof value === 'number';
+  return typeof value === 'number' || !Number.isNaN(Number(value));
+}
+
+export function range(start: number, end: number, step = 1): number[] {
+  let array: number[] = [];
+
+  if (start < end) {
+    for (let index = start; index < end; index += step) {
+      array = [...array, index];
+    }
+  } else {
+    for (let index = start; index > end; index += step) {
+      array = [...array, index];
+    }
+  }
+
+  return array;
 }
 
 type TryCatchResult<Type> =

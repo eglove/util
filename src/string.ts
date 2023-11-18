@@ -11,10 +11,12 @@ export function urlDetails(url: URL): UrlDetail[] {
   });
 
   let words: UrlDetail[] = [];
-  const urlBuilder = new URL(url.origin);
+  let seenPaths: string[] = [];
+  let urlBuilder = new URL(url.origin);
 
   for (const path of paths) {
-    const url = `${urlBuilder.toString()}/${path}`;
+    seenPaths = [...seenPaths, path];
+    urlBuilder = new URL(seenPaths.join('/'), url.origin);
 
     words = [
       ...words,
@@ -27,7 +29,7 @@ export function urlDetails(url: URL): UrlDetail[] {
               .toLowerCase()}`;
           })
           .join(' '),
-        pathUrl: new URL(url),
+        pathUrl: urlBuilder,
       },
     ];
   }

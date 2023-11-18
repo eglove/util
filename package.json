@@ -15,5 +15,8 @@
   "dependencies": {
     "eslint-config-ethang": "^11.4.13",
     "rimraf": "^5.0.5"
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6"
   }
 }

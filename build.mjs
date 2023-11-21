@@ -4,7 +4,7 @@ import { execSync } from 'child_process'
 
 await rimraf('dist');
 
-execSync('tsc --project tsconfig.json');
+execSync('tsc --project tsconfig.build.json');
 
 fs.copyFileSync(
   'package.json',

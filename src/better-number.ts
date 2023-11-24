@@ -22,7 +22,10 @@ class BetterNumber {
   }: BetterNumberProperties) {
     this._formatOptions = formatOptions;
     this._locale = locale;
-    this._number = Number.isNaN(Number(number)) ? undefined : Number(number);
+    this._number =
+      isNil(number) || Number.isNaN(Number(number))
+        ? undefined
+        : Number(number);
   }
 
   public get locale(): Intl.LocalesArgument {

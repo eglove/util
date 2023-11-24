@@ -6,7 +6,6 @@ describe('BetterNumber', () => {
   it('should return undefined if number is NaN', () => {
     const length = betterNumber({
       locale: 'en-US',
-      // @ts-expect-error allow bad params
       number: undefined,
     });
 
@@ -23,5 +22,14 @@ describe('BetterNumber', () => {
 
     expect(length.locale).toBe('pt-BR');
     expect(length.format()).toBe('1.000');
+  });
+
+  it('should return undefined when number is null', () => {
+    const height = betterNumber({
+      locale: 'en-US',
+      number: null,
+    });
+
+    expect(height.number).toBe(undefined);
   });
 });

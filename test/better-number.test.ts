@@ -10,18 +10,18 @@ describe('BetterNumber', () => {
       number: undefined,
     });
 
-    expect(length.getNumber()).toBe(undefined);
+    expect(length.number).toBe(undefined);
     expect(length.format()).toBe(undefined);
 
     length.setNumber(1000);
 
-    expect(length.getNumber()).toBe(1000);
-    expect(length.getLocale()).toBe('en-US');
+    expect(length.number).toBe(1000);
+    expect(length.locale).toBe('en-US');
     expect(length.format()).toBe('1,000');
 
     length.setLocale('pt-BR');
 
-    expect(length.getLocale()).toBe('pt-BR');
+    expect(length.locale).toBe('pt-BR');
     expect(length.format()).toBe('1.000');
   });
 });

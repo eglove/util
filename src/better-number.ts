@@ -14,7 +14,7 @@ class BetterNumber {
     this._number = Number.isNaN(Number(number)) ? undefined : number;
   }
 
-  public getLocale(): Intl.LocalesArgument {
+  public get locale(): Intl.LocalesArgument {
     return this._locale;
   }
 
@@ -22,7 +22,7 @@ class BetterNumber {
     this._locale = value;
   }
 
-  public getNumber(): typeof this._number {
+  public get number(): typeof this._number {
     return this._number;
   }
 

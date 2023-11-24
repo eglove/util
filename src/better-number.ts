@@ -8,9 +8,11 @@ type BetterNumberProperties = {
   number: number | bigint;
 };
 
+type NumberType = Omit<number | bigint, 'toLocaleString'> | undefined;
+
 class BetterNumber {
   private _locale: Intl.LocalesArgument;
-  private _number?: Omit<number | bigint, 'toLocaleString'>;
+  private _number?: NumberType;
   private readonly _formatOptions?: FormatOptions;
 
   public constructor({
@@ -31,11 +33,11 @@ class BetterNumber {
     this._locale = value;
   }
 
-  public get number(): typeof this._number {
+  public get number(): NumberType {
     return this._number;
   }
 
-  public setNumber(number: typeof this._number): void {
+  public setNumber(number: NumberType): void {
     this._number = number;
   }
 

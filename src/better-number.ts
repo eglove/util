@@ -3,11 +3,9 @@ import { isBigIntOrNumber } from './number';
 
 type FormatOptions = Intl.NumberFormatOptions & BigIntToLocaleStringOptions;
 
-type NumberType = Omit<number | bigint, 'toLocaleString'> | undefined;
-
 class BetterNumber {
   private readonly _locale?: Intl.LocalesArgument;
-  private readonly _number?: NumberType;
+  private readonly _number?: number | bigint;
   private readonly _formatOptions?: FormatOptions;
 
   public constructor(
@@ -37,7 +35,7 @@ class BetterNumber {
     return this._locale;
   }
 
-  public get number(): NumberType {
+  public get number(): number | bigint | undefined {
     return this._number;
   }
 

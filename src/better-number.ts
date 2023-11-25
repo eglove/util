@@ -1,4 +1,5 @@
 import { isNil } from './data';
+import { isBigIntOrNumber } from './number';
 
 type FormatOptions = Intl.NumberFormatOptions & BigIntToLocaleStringOptions;
 
@@ -15,10 +16,15 @@ class BetterNumber {
     formatOptions?: FormatOptions,
   ) {
     this._formatOptions = formatOptions;
-    this._number =
-      isNil(number) || Number.isNaN(Number(number))
-        ? undefined
-        : Number(number);
+
+    if (typeof number === 'bigint' || typeof number === 'number') {
+      this._number = number;
+    } else if (typeof number === 'string' && isBigIntOrNumber(number)) {
+      this._number =
+        Number(number) > Number.MAX_SAFE_INTEGER
+          ? BigInt(number)
+          : Number(number);
+    }
 
     if (isNil(locale) && typeof navigator !== 'undefined') {
       this._locale = navigator.language;

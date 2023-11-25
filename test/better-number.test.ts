@@ -3,6 +3,42 @@ import { describe, expect, it } from 'vitest';
 import { betterNumber } from '../src/better-number';
 
 describe('BetterNumber', () => {
+  it('should accept bigint', () => {
+    const value = betterNumber(BigInt(123));
+
+    expect(value.number).toBe(BigInt(123));
+  });
+
+  it('should accept number', () => {
+    const value = betterNumber(123);
+
+    expect(value.number).toBe(123);
+  });
+
+  it('should accept BigInt string', () => {
+    const value = betterNumber('12345678901234567890');
+
+    expect(value.number).toBe(BigInt('12345678901234567890'));
+  });
+
+  it('should accept number string', () => {
+    const value = betterNumber('123');
+
+    expect(value.number).toBe(123);
+  });
+
+  it('should use navigators language when undefined', () => {
+    // eslint-disable-next-line functional/immutable-data
+    Object.defineProperty(globalThis, 'navigator', {
+      value: {
+        language: 'fr',
+      },
+    });
+
+    const value = betterNumber(123);
+    expect(value.locale).toBe('fr');
+  });
+
   it('should format correctly', () => {
     const englishUs = betterNumber(1000, 'en-US', {
       style: 'unit',

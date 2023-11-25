@@ -5,8 +5,8 @@ type FormatOptions = Intl.NumberFormatOptions & BigIntToLocaleStringOptions;
 type NumberType = Omit<number | bigint, 'toLocaleString'> | undefined;
 
 class BetterNumber {
-  private _locale?: Intl.LocalesArgument;
-  private _number?: NumberType;
+  private readonly _locale?: Intl.LocalesArgument;
+  private readonly _number?: NumberType;
   private readonly _formatOptions?: FormatOptions;
 
   public constructor(
@@ -31,16 +31,8 @@ class BetterNumber {
     return this._locale;
   }
 
-  public setLocale(value: Intl.LocalesArgument): void {
-    this._locale = value;
-  }
-
   public get number(): NumberType {
     return this._number;
-  }
-
-  public setNumber(number: NumberType): void {
-    this._number = number;
   }
 
   public format(options?: FormatOptions): string | undefined {

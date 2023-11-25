@@ -2,30 +2,29 @@ import { isNil } from './data';
 
 type FormatOptions = Intl.NumberFormatOptions & BigIntToLocaleStringOptions;
 
-type BetterNumberProperties = {
-  formatOptions?: FormatOptions;
-  locale: string;
-  number: unknown;
-};
-
 type NumberType = Omit<number | bigint, 'toLocaleString'> | undefined;
 
 class BetterNumber {
-  private _locale: Intl.LocalesArgument;
+  private _locale?: Intl.LocalesArgument;
   private _number?: NumberType;
   private readonly _formatOptions?: FormatOptions;
 
-  public constructor({
-    formatOptions,
-    locale,
-    number,
-  }: BetterNumberProperties) {
+  public constructor(
+    number: number,
+    locale?: string,
+    formatOptions?: FormatOptions,
+  ) {
     this._formatOptions = formatOptions;
-    this._locale = locale;
     this._number =
       isNil(number) || Number.isNaN(Number(number))
         ? undefined
         : Number(number);
+
+    if (isNil(locale) && typeof navigator !== 'undefined') {
+      this._locale = navigator.language;
+    } else if (!isNil(locale)) {
+      this._locale = locale;
+    }
   }
 
   public get locale(): Intl.LocalesArgument {
@@ -57,7 +56,9 @@ class BetterNumber {
 }
 
 export const betterNumber = (
-  properties: BetterNumberProperties,
+  number: number,
+  locale?: string,
+  formatOptions?: FormatOptions,
 ): BetterNumber => {
-  return new BetterNumber(properties);
+  return new BetterNumber(number, locale, formatOptions);
 };

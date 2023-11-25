@@ -4,10 +4,8 @@ import { betterNumber } from '../src/better-number';
 
 describe('BetterNumber', () => {
   it('should return undefined if number is NaN', () => {
-    const length = betterNumber({
-      locale: 'en-US',
-      number: undefined,
-    });
+    // @ts-expect-error allow bad param
+    const length = betterNumber(undefined, 'en-US');
 
     expect(length.number).toBe(undefined);
     expect(length.format()).toBe(undefined);
@@ -25,10 +23,8 @@ describe('BetterNumber', () => {
   });
 
   it('should return undefined when number is null', () => {
-    const height = betterNumber({
-      locale: 'en-US',
-      number: null,
-    });
+    // @ts-expect-error allow bad param
+    const height = betterNumber(null, 'en-US');
 
     expect(height.number).toBe(undefined);
   });

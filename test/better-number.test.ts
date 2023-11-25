@@ -4,7 +4,6 @@ import { betterNumber } from '../src/better-number';
 
 describe('BetterNumber', () => {
   it('should return undefined if number is NaN', () => {
-    // @ts-expect-error allow bad param
     const length = betterNumber(undefined, 'en-US');
 
     expect(length.number).toBe(undefined);
@@ -23,7 +22,6 @@ describe('BetterNumber', () => {
   });
 
   it('should return undefined when number is null', () => {
-    // @ts-expect-error allow bad param
     const height = betterNumber(null, 'en-US');
 
     expect(height.number).toBe(undefined);

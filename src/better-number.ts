@@ -10,7 +10,7 @@ class BetterNumber {
   private readonly _formatOptions?: FormatOptions;
 
   public constructor(
-    number: number,
+    number: unknown,
     locale?: string,
     formatOptions?: FormatOptions,
   ) {
@@ -56,7 +56,7 @@ class BetterNumber {
 }
 
 export const betterNumber = (
-  number: number,
+  number: unknown,
   locale?: string,
   formatOptions?: FormatOptions,
 ): BetterNumber => {

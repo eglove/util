@@ -7,16 +7,17 @@ await rimraf('dist');
 
 execSync('tsc --project tsconfig.build.json');
 
-fs.copyFileSync(
-  'package.json',
-  'dist/package.json',
-)
-
 esbuild.buildSync({
   minify: true,
   outdir: 'dist',
   format: 'esm',
   entryPoints: ['src/*'],
 })
+
+fs.copyFileSync(
+  'package.json',
+  'dist/package.json',
+)
+
 
 execSync('cd dist && npm publish --access public && cd ..')

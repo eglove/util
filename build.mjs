@@ -1,6 +1,7 @@
 import * as fs from 'node:fs'
 import { rimraf } from 'rimraf'
 import { execSync } from 'child_process'
+import esbuild from 'esbuild';
 
 await rimraf('dist');
 
@@ -10,5 +11,12 @@ fs.copyFileSync(
   'package.json',
   'dist/package.json',
 )
+
+esbuild.buildSync({
+  minify: true,
+  outdir: 'dist',
+  format: 'esm',
+  entryPoints: ['src/*'],
+})
 
 execSync('cd dist && npm publish --access public && cd ..')

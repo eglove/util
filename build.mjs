@@ -20,6 +20,7 @@ fs.writeFileSync('tsconfig.build.json', JSON.stringify(tsConfig, null, 2));
 execSync('tsc --project tsconfig.build.json');
 
 esbuild.buildSync({
+  bundle: true,
   minify: true,
   outdir: 'dist',
   format: 'esm',

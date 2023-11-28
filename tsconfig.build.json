@@ -1,6 +1,7 @@
 {
   "include": ["src"],
   "compilerOptions": {
+    "emitDeclarationOnly": true,
     "module": "CommonJS",
     "target": "ESNEXT",
     "allowJs": false,

@@ -19,5 +19,4 @@ fs.copyFileSync(
   'dist/package.json',
 )
 
-
 execSync('cd dist && npm publish --access public && cd ..')

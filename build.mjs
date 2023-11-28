@@ -5,6 +5,18 @@ import esbuild from 'esbuild';
 
 await rimraf('dist');
 
+const tsConfigString = fs.readFileSync('tsconfig.json', {encoding: 'utf8'});
+let tsConfig = JSON.parse(tsConfigString);
+tsConfig = {
+  include: ["src"],
+  compilerOptions: {
+    emitDeclarationOnly: true,
+    ...tsConfig.compilerOptions,
+  },
+  ...tsConfig,
+}
+fs.writeFileSync('tsconfig.build.json', JSON.stringify(tsConfig, null, 2));
+
 execSync('tsc --project tsconfig.build.json');
 
 esbuild.buildSync({

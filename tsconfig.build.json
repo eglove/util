@@ -1,7 +1,8 @@
 {
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "compilerOptions": {
-    "emitDeclarationOnly": true,
     "module": "ESNext",
     "target": "ESNEXT",
     "allowJs": false,
@@ -22,6 +23,6 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   }
 }

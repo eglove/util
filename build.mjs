@@ -1,35 +1,20 @@
-import * as fs from 'node:fs'
-import { rimraf } from 'rimraf'
-import { execSync } from 'child_process'
-import esbuild from 'esbuild';
+import { projectBuilder } from '@ethang/project-builder/project-builder.js'
 
-await rimraf('dist');
-
-const tsConfigString = fs.readFileSync('tsconfig.json', {encoding: 'utf8'});
-let tsConfig = JSON.parse(tsConfigString);
-tsConfig = {
-  include: ["src"],
-  compilerOptions: {
-    emitDeclarationOnly: true,
-    ...tsConfig.compilerOptions,
+await projectBuilder('util', 'master', {
+  preVersionBumpScripts: ['UPDATE', 'PRUNE'],
+  postVersionBumpScripts: ['DEDUPE', 'LINT', 'TEST'],
+  publishDirectory: 'dist',
+  tsConfigOverrides: {
+    include: ['src'],
+    compilerOptions: {
+      emitDeclarationOnly: true,
+    }
   },
-  ...tsConfig,
-}
-fs.writeFileSync('tsconfig.build.json', JSON.stringify(tsConfig, null, 2));
-
-execSync('tsc --project tsconfig.build.json');
-
-esbuild.buildSync({
-  bundle: true,
-  minify: true,
-  outdir: 'dist',
-  format: 'esm',
-  entryPoints: ['src/*'],
+  tsupOptions: {
+    format: ['cjs', 'esm'],
+    bundle: true,
+    minify: true,
+    outDir: 'dist',
+    entry: ['src/*'],
+  }
 })
-
-fs.copyFileSync(
-  'package.json',
-  'dist/package.json',
-)
-
-execSync('cd dist && npm publish --access public && cd ..')

@@ -4,6 +4,7 @@ await projectBuilder('util', 'master', {
   preVersionBumpScripts: ['UPDATE', 'PRUNE'],
   postVersionBumpScripts: ['DEDUPE', 'LINT', 'TEST'],
   publishDirectory: 'dist',
+  isLibrary: true,
   tsConfigOverrides: {
     include: ['src'],
     compilerOptions: {

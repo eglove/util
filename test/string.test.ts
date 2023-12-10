@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { urlDetails } from '../src/string';
+import { urlDetails } from '../src/string.ts';
 
 describe('string', () => {
   it('should return path details for a url', () => {

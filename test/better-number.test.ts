@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { betterNumber } from '../src/better-number';
+import { betterNumber } from '../src/better-number.ts';
 
 describe('BetterNumber', () => {
   it('should accept bigint', () => {

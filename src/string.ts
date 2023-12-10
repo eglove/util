@@ -1,4 +1,4 @@
-import { isEmpty } from './data';
+import { isEmpty } from './data.ts';
 
 type UrlDetail = {
   pathLabel: string;

@@ -1,5 +1,8 @@
 export function isBigIntOrNumber(value: unknown): boolean {
-  if (typeof value === 'number' || typeof value === 'bigint') {
+  if (
+    (typeof value === 'number' || typeof value === 'bigint') &&
+    !Number.isNaN(value)
+  ) {
     return true;
   }
 

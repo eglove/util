@@ -1,5 +1,5 @@
-import { isNil } from './data';
-import { isBigIntOrNumber } from './number';
+import { isNil } from './data.ts';
+import { isBigIntOrNumber } from './number.ts';
 
 type FormatOptions = Intl.NumberFormatOptions & BigIntToLocaleStringOptions;
 

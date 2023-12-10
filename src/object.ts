@@ -1,4 +1,4 @@
-import { isNil } from './data';
+import { isNil } from './data.ts';
 
 type ObjectType = Record<string, unknown>;
 

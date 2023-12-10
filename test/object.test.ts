@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { deepMerge } from '../src/object';
+import { deepMerge } from '../src/object.ts';
 
 describe('object', () => {
   it('should deep merge objects', () => {

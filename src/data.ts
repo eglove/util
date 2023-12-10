@@ -24,18 +24,6 @@ export function isNil<Type>(
   return value === null || value === undefined;
 }
 
-export function isNumber(value: unknown): value is number {
-  if (typeof value === 'number' || typeof value === 'bigint') {
-    return true;
-  }
-
-  if (typeof value === 'string') {
-    return !Number.isNaN(Number(value));
-  }
-
-  return false;
-}
-
 export function range(start: number, end: number, step = 1): number[] {
   let array: number[] = [];
 

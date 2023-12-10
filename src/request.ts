@@ -1,4 +1,4 @@
-import { isNil } from './data';
+import { isNil } from './data.ts';
 
 export function getCookieValue(
   cookieName: string,
